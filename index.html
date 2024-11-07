@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contact Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Contact Manager</h1>
+        <form id="addContactForm" class="form">
+            <h2>Add Contact</h2>
+            <input type="text" id="contactName" placeholder="Name" required>
+            <input type="text" id="contactPhone" placeholder="Phone" required>
+            <input type="email" id="contactEmail" placeholder="Email" required>
+            <button type="submit">Add Contact</button>
+            <p id="addContactMessage" class="message"></p>
+        </form>
+
+        <h2>Search Contacts</h2>
+        <input type="text" id="searchInput" placeholder="Enter name prefix">
+        <button id="searchButton">Search</button>
+        <p id="searchResult" class="message"></p>
+
+        <h2>Delete Contact</h2>
+        <input type="text" id="deleteInput" placeholder="Enter name to delete">
+        <button id="deleteButton">Delete</button>
+        <p id="deleteMessage" class="message"></p>
+
+        <h2>View All Contacts</h2>
+        <button id="viewButton">View Contacts</button>
+        <ul id="contactList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
