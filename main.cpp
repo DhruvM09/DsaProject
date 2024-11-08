@@ -4,6 +4,17 @@
 #include <vector>
 using namespace std;
 
+class TrieNode{
+    public:
+    TrieNode * child[52];
+    bool isWord;
+    TrieNode(){
+        isWord = false;
+        for(auto &a : child) a = nullptr;
+    }
+};
+
+//cotnactNode for BST
 class contactNode {
 public:
     string Name;
@@ -19,7 +30,7 @@ public:
         left = right = nullptr;
     }
 };
-
+//funtion to print a single contact
 void printContact(contactNode* node) {
     if (node) {
         cout << "---------------------------------\n";
@@ -30,7 +41,7 @@ void printContact(contactNode* node) {
         cout << "---------------------------------\n";
     }
 }
-
+//BST class
 class ConatactBinarySearchTree {
 public:
     contactNode* head;
@@ -77,7 +88,6 @@ public:
                 return currentNode;
             }
         }
-        cout << "Contact not found.\n";
         return nullptr;
     }
 
@@ -143,8 +153,68 @@ public:
     return root;
 } 
 };
+//Trie class
+class Trie{
+   TrieNode * root; 
+   public:
+    Trie(){
+        root = new TrieNode();
+    }
+    void insert(string s){
+        TrieNode * cur = root;
+        for(auto &c:s){
+            int i = 0;
+            if(c < 'a'){
+                i = 26 + (c - 'A');
+            } 
+            else{
+                i = c - 'a';
+            }
+                
+            if(!cur->child[i])cur->child[i]= new TrieNode();
+            cur = cur->child[i];
+        }
+        cur->isWord = true;
+    }
+    void dfs(TrieNode *node , string cur , ConatactBinarySearchTree &tree){
 
-void LoadContacts(ConatactBinarySearchTree& tree) {
+        if(node->isWord && tree.searchByName(cur))cout << cur << '\n';
+        for(int i = 0; i < 52;i++){
+            auto child = node->child[i];
+            if(child){
+            if(i <= 25)
+            cur += ('a' + i);
+            else
+            cur += ('A' + (i-26));
+
+            dfs(child , cur,tree);
+            }
+        }
+        
+    }
+    bool search(string key ,bool prefix, ConatactBinarySearchTree & tree){
+        TrieNode *cur = root;
+        for(auto &c :key){
+            int i;
+            if(c < 'a'){
+                i = 26 + (c - 'A');
+            } 
+            else{
+                i = c - 'a';
+            }
+            if(!cur->child[i]) return false;
+            cur = cur->child[i];
+        }
+            dfs(cur,key,tree);
+            return true;
+        }
+
+    bool startsWith(string prefix , ConatactBinarySearchTree &tree){
+        return search(prefix , true,tree);
+    }
+};
+//function to load contacts from file to BST at execution 
+void LoadContacts(ConatactBinarySearchTree& tree,Trie &t) {
     ifstream Contacts("contacts.txt");
     if (!Contacts) {
         cout << "Error opening file.\n";
@@ -162,9 +232,12 @@ void LoadContacts(ConatactBinarySearchTree& tree) {
         }
         contactNode* node = new contactNode(name, number, email);
         tree.insert(node);
+        
+        t.insert(node->Name);
     }
     Contacts.close();
 }
+//function to update contacts file from bst after completion of program
 void updateContacts(ConatactBinarySearchTree &tree){
     vector<string> lines;
     tree.traverse(tree.head,lines); 
@@ -177,11 +250,30 @@ void updateContacts(ConatactBinarySearchTree &tree){
     remove("contacts.txt");
     rename("temp.txt", "contacts.txt");
 }
+//TrieNode class
 
 int main() {
     ConatactBinarySearchTree ContactTree;
-    LoadContacts(ContactTree);
-
+    Trie trieNames;
+    LoadContacts(ContactTree,trieNames);
+    bool login = true;
+    while (!login)
+    {
+        cout << "1.login\n";
+        cout << "2.create account\n";
+        int choice;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            
+            break;
+        
+        default:
+            break;
+        }
+    }
+    
     bool Running = true;
     while (Running) {
         cout << "\n===========================\n";
@@ -192,7 +284,8 @@ int main() {
         cout << "3. Search contact\n";
         cout << "4. Delete contact\n";
         cout << "5. See all contacts\n";
-        cout << "6. Exit\n";
+        cout << "6. Search by prefix\n";
+        cout << "7. Exit\n";
         cout << "===========================\n";
         cout << "Enter your choice: ";
         int choice;
@@ -210,6 +303,7 @@ int main() {
                 getline(cin, email);
                 contactNode* node = new contactNode(name, number, email);
                 ContactTree.insert(node);
+                trieNames.insert(node->Name);
                 break;
             }
             case 2: {
@@ -258,6 +352,9 @@ int main() {
                 if (result) {
                     printContact(result);
                 }
+                else{
+                    cout << "Contact not found\n";
+                }
                 break;
             }
             case 4: {
@@ -274,7 +371,16 @@ int main() {
             case 5:
                 ContactTree.dfs(ContactTree.head);
                 break;
+
             case 6:
+            {
+                cout << "Enter Prefix:";
+                string pre;
+                cin >> pre;
+                trieNames.startsWith(pre,ContactTree);
+                break;
+            }
+            case 7:
                 Running = false;
                 cout << "Exiting... Goodbye!\n";
                 break;

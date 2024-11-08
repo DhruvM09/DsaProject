@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background color */
+    color: #f0f0f0; /* Lighter text color for readability */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.sidebar {
+    width: 33%;
+    padding: 20px;
+    background-color: #1e1e1e; /* Darker background for sidebar */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    margin-right: 20px;
+    height: 100%;
+}
+
+.sidebar h1 {
+    text-align: center;
+    color: #ffcc00; /* Bright yellow text for heading */
+    margin-bottom: 30px;
+}
+
+.sidebar h2 {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #dcdcdc; /* Soft light gray */
+}
+
+.sidebar input,
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px; /* Softer rounded corners */
+    font-size: 14px;
+    background-color: #333333; /* Dark background for inputs */
+    color: #f0f0f0; /* Light text inside inputs */
+    border: 1px solid #444444; /* Slightly lighter border */
+}
+
+.sidebar button {
+    background-color: #3498db; /* Bright blue button */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.contacts-section {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #222222; /* Darker background for contact section */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;  /* Enable vertical scrolling */
+    max-height: 600px; /* Set maximum height for scrolling */
+}
+
+.contacts-section h2 {
+    color: #ffffff; /* White text for section titles */
+}
+
+.contacts-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contacts-section li {
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: #333333; /* Dark background for contact items */
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.contacts-section button {
+    background-color: #e74c3c; /* Red for delete buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.contacts-section button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.tree-section {
+    width: 100%;
+    padding: 20px;
+    background-color: #222222; /* Dark background for tree visualization */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#bstCanvas {
+    border: 2px solid #444444; /* Subtle border for the canvas */
+    background-color: #181818; /* Darker canvas background */
+    margin-top: 20px;
+    border-radius: 8px; /* Rounded canvas border */
+}

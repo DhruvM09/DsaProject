@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Contact Manager</h1>
+
+            <div>
+                <h2>Add/Edit Contact</h2>
+                <input type="text" id="name" placeholder="Name" />
+                <input type="text" id="phone" placeholder="Phone Number" />
+                <input type="email" id="email" placeholder="Email" />
+                <input type="date" id="birthday" placeholder="Birthday" />
+                <button onclick="addOrUpdateContact()">Add/Update Contact</button>
+            </div>
+
+          <div>
+    <h2>Search & Delete Contact</h2>
+    <input type="text" id="searchName" placeholder="Name" />
+    <button onclick="searchContact()">Search</button>
+    <button onclick="deleteContactByName()">Delete</button> <!-- New button for delete by name -->
+    </div>
+ 
+        </div>
+
+        <div class="contacts-section">
+            <h2>All Contacts</h2>
+            <button onclick="displayContacts()">Refresh Contacts</button>
+            <ul id="contactList"></ul>
+        </div>
+
+        <div class="tree-section">
+            <h2>Binary Tree Visualization</h2>
+            <canvas id="bstCanvas" width="800" height="600"></canvas>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
