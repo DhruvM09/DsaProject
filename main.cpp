@@ -190,6 +190,7 @@ class Trie{
             cur += ('A' + (i-26));
 
             dfs(child , cur,tree);
+	    //backtracking step
 	    cur.pop_back();
             }
         }
