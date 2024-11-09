@@ -154,6 +154,8 @@ public:
 } 
 };
 //Trie class
+
+
 class Trie{
    TrieNode * root; 
    public:
@@ -178,7 +180,7 @@ class Trie{
     }
     void dfs(TrieNode *node , string cur , ConatactBinarySearchTree &tree){
 
-        if(node->isWord && tree.searchByName(cur))cout << cur << '\n';
+        if(node->isWord )cout << cur << '\n';
         for(int i = 0; i < 52;i++){
             auto child = node->child[i];
             if(child){
@@ -188,6 +190,7 @@ class Trie{
             cur += ('A' + (i-26));
 
             dfs(child , cur,tree);
+	    cur.pop_back();
             }
         }
         
